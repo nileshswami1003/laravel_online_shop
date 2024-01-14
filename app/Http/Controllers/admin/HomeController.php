@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Auth;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+        $admin = Auth::guard('admin')->user();
+        echo 'welcome '.$admin->name.' <a href="'.route('admin.logout').'">Logout</a> ';
+    }
+
+    public function logout()
+    {
+        Auth::guard()->logout();
+        return redirect()->route('admin.login');
+    }
+}
